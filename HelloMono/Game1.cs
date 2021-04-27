@@ -1,5 +1,4 @@
 ﻿using System;
-using Game1;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,22 +7,24 @@ namespace HelloMono
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         
-        MyClass myNewClass;
 
         Texture2D texture;
-        Vector2 position;
-        Rectangle drawRec;
-        float alpha = 1.0f;
-        float rotation = 0.0f;
-        Vector2 origin = new Vector2(0,0);
-        float scale = 3f;
-        SpriteEffects spriteEffect = SpriteEffects.None;
-        float zDepth = 0.1f;
 
-        private Color bg_color_day = new Color(66, 76, 110, 255);
+        
+        readonly float alpha = 1.0f;
+        readonly float rotation = 0.0f;
+        readonly float scale = 3f;
+        readonly SpriteEffects spriteEffect = SpriteEffects.None;
+        readonly float zDepth = 0.1f;
+
+        private readonly Color bg_color_day = new Color(66, 76, 110, 255);
+        
+        //private Array dino_frames = [0,1];
+
+        private CDino Dino;
 
         
         public Game1()
@@ -44,7 +45,9 @@ namespace HelloMono
           _graphics.PreferredBackBufferWidth = 600;
           _graphics.PreferredBackBufferHeight = 500;   
           _graphics.ApplyChanges();
-          
+
+          Dino = new CDino(texture);
+
         }
         
 
@@ -54,15 +57,11 @@ namespace HelloMono
             
             
             texture = Content.Load<Texture2D>("dino_run");
-            drawRec = new Rectangle(0, 0, 16+1, 19+1);
-            position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
-            origin = new Vector2(texture.Width/2, texture.Height/2);
+           // drawRec = new Rectangle(0, 0, 16 + 1, 19 + 1);
+            //position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+            //origin = new Vector2(texture.Width/2, texture.Height/2);
 
-            myNewClass = new MyClass();
-            Console.WriteLine("My Class name is: " + myNewClass.name);
 
-            myNewClass.ChangeName("Bob");
-            Console.WriteLine("My Class name is: " + myNewClass.name);
             
         }
         
@@ -70,30 +69,8 @@ namespace HelloMono
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                position.Y -= 2;
-            }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                position.Y += 2;
-            }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                position.X -= 2;
-            }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                position.X += 2;
-            }
-
-
-                
-
-            // TODO: Add your update logic here
+ 
+            Dino.Update();
 
             base.Update(gameTime);
         }
@@ -103,6 +80,8 @@ namespace HelloMono
 
             GraphicsDevice.Clear(bg_color_day);
             
+            
+            
             // This can be bad later, because I don't know what it does. SamplerState.PointClamp makes resized pixel art sharp and the rest is hopefully default.
             _spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
@@ -111,15 +90,7 @@ namespace HelloMono
                 RasterizerState.CullNone,
                 null);
 
-                _spriteBatch.Draw(   texture, 
-                    position,
-                    drawRec,
-                    Color.White * alpha,
-                    rotation,
-                    origin,
-                    scale,
-                    spriteEffect,
-                    zDepth);
+            Dino.Draw(_spriteBatch);
 
             _spriteBatch.End();
             
@@ -127,6 +98,12 @@ namespace HelloMono
         }
     }
 }
+
+
+
+
+
+
 
 
 
