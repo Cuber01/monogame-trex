@@ -19,10 +19,13 @@ namespace HelloMono
         float alpha = 1.0f;
         float rotation = 0.0f;
         Vector2 origin = new Vector2(0,0);
-        float scale = 2.0f;
+        float scale = 3f;
         SpriteEffects spriteEffect = SpriteEffects.None;
         float zDepth = 0.1f;
 
+        private Color bg_color_day = new Color(66, 76, 110, 255);
+
+        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -50,8 +53,8 @@ namespace HelloMono
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             
             
-            texture = Content.Load<Texture2D>(@"dino_run");
-            drawRec = new Rectangle(0, 0, texture.Width, texture.Height);
+            texture = Content.Load<Texture2D>("dino_run");
+            drawRec = new Rectangle(0, 0, 16+1, 19+1);
             position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
             origin = new Vector2(texture.Width/2, texture.Height/2);
 
@@ -67,9 +70,28 @@ namespace HelloMono
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                position.Y -= 2;
+            }
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                position.Y += 2;
+            }
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                position.X -= 2;
+            }
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                position.X += 2;
+            }
+
+
+                
 
             // TODO: Add your update logic here
 
@@ -78,10 +100,17 @@ namespace HelloMono
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+
+            GraphicsDevice.Clear(bg_color_day);
             
-            _spriteBatch.Begin();
-            
+            // This can be bad later, because I don't know what it does. SamplerState.PointClamp makes resized pixel art sharp and the rest is hopefully default.
+            _spriteBatch.Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.PointClamp,
+                DepthStencilState.None,
+                RasterizerState.CullNone,
+                null);
+
                 _spriteBatch.Draw(   texture, 
                     position,
                     drawRec,
