@@ -13,7 +13,7 @@ namespace HelloMono
 
         Texture2D texture;
 
-        private readonly Color bg_color_day = new Color(66, 76, 110, 255);
+        private readonly Color bg_color = new Color(14, 7, 27, 255);
 
         private CDino Dino;
 
@@ -69,7 +69,7 @@ namespace HelloMono
         protected override void Draw(GameTime gameTime)
         {
 
-            GraphicsDevice.Clear(bg_color_day);
+            GraphicsDevice.Clear(bg_color);
             
             
             

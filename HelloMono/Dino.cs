@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,11 +6,6 @@ namespace HelloMono
 {
     public class CDino
     {
-
-
-  
-
-
 
         readonly float alpha = 1.0f;
         readonly float rotation = 0.0f;
@@ -30,15 +20,15 @@ namespace HelloMono
         Vector2 origin;
 
         
-        int anim_i = 0;
-        int anim_t = 0;
+        int anim_i;
+        int anim_t;
         
         int[,] animation_frames = 
         {
-             {0, 0, 17, 20},
-             {17, 0, 17, 20},
-             {34, 0, 17, 20},
-             {51, 0, 17, 20}
+             {1, 1, 15, 19},
+             {17, 2, 15, 18},
+             {34, 2, 15, 18},
+             {50, 1, 15, 19}
         };
         
 
@@ -96,7 +86,7 @@ namespace HelloMono
 
         }
 
-        public void Animate()
+        private void Animate()
         {
             
             anim_t += 1;
@@ -107,7 +97,7 @@ namespace HelloMono
                 {
 
 
-                    // How do I use the whole array from a dimensional one in C#?
+                    // TODO How do I use the whole array from a dimensional one in C#?
                     drawRec = new Rectangle(animation_frames[anim_i, 0], animation_frames[anim_i, 1], animation_frames[anim_i, 2] , animation_frames[anim_i, 3]);
                     anim_i += 1;
                 }
