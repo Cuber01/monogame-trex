@@ -7,45 +7,69 @@ namespace HelloMono
 {
     public class CDirt
     {
-        //Random random = new Random();
+        // random init
+        private static Random random = new Random();
         
-        private readonly float alpha = 1.0f;
+        // sprite drawing options
+        readonly float alpha = 1.0f;
         readonly float rotation = 0.0f;
         readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
-        
-        
-        private int hasFlower;
-        private int hasCane;
-        private int hasSpike;
-        private int spriteNumber;
-
         private int zDepth;
 
-        private Texture2D CaneTexture;
-        private Texture2D FlowerTexture;
-        private Texture2D MyTexture;
-        Vector2 position;
-        Rectangle drawRec;
-        Vector2 origin;
+        
+        // "properties"
+        private int hasTree;
+        private int hasCane;
+        private int hasSpike;
+        private int dirtSpriteNumber = random.Next(0,3);
 
-        public CDirt(Texture2D _CaneTexture, Texture2D _FlowerTexure, Texture2D _MyTexture, Rectangle _drawRec, Vector2 _position)
+        // decor rects
+        private Rectangle treeRect = new Rectangle(32,0,8,8);
+        private Rectangle caneRect = new Rectangle(24,0,8,8);
+        
+        // dirt rects
+        private static readonly Rectangle dirt1Rect = new Rectangle(0,0,8,8);
+        private static readonly Rectangle dirt2Rect = new Rectangle(8,0,8,8);
+        private static readonly Rectangle dirt3Rect = new Rectangle(16,0,0,0);
+
+        private Rectangle[] dirt = {dirt1Rect, dirt2Rect, dirt3Rect};
+        
+        // texture
+        private readonly Texture2D spriteSheet;
+        private Rectangle drawRec;
+       
+        // vector info 
+        Vector2 position;
+        Vector2 origin;
+        
+ 
+
+        public CDirt(Texture2D texture, Vector2 _position)
         {
 
-            CaneTexture = _CaneTexture;
-            FlowerTexture = _FlowerTexure;
-            MyTexture = _MyTexture;
-            drawRec = _drawRec;
+            spriteSheet = texture;
             position = _position;
+
+            drawRec = dirt[dirtSpriteNumber];
+
+            // TODO count if has flower is true
+            // TODO count if has cane is true
 
         }
         
-        //spriteNumber = random.Next(4);
         
+        
+        public void Update()
+        {
+            position.X -= 1;
+        }
 
+        
+        
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(MyTexture, 
+            spriteBatch.Draw(spriteSheet, 
                 position,
                 drawRec,
                 Color.White, // this *may* cause problems
@@ -55,13 +79,12 @@ namespace HelloMono
                 spriteEffect,
                 zDepth);
             
+            // TODO draw cane and flower
+            
 
         }
 
-        public void Update()
-        {
 
-        }
     }
 }
 

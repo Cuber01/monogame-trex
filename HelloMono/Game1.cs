@@ -7,15 +7,20 @@ namespace HelloMono
 {
     public class Game1 : Game
     {
+        // load libraries
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         
+        // load textures
+        Texture2D dinoTexture;
+        Texture2D spriteSheet;
 
-        Texture2D texture;
-
+        // bg color
         private readonly Color bg_color = new Color(14, 7, 27, 255);
 
+        // load classes
         private CDino Dino;
+        private CDirt Dirt;
 
         
         public Game1()
@@ -37,7 +42,8 @@ namespace HelloMono
           _graphics.PreferredBackBufferHeight = 500;   
           _graphics.ApplyChanges();
 
-          Dino = new CDino(texture);
+          Dino = new CDino(dinoTexture);
+          Dirt = new CDirt(spriteSheet, new Vector2(100,100));
 
         }
         
@@ -47,7 +53,8 @@ namespace HelloMono
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             
             
-            texture = Content.Load<Texture2D>("dino_run");
+            dinoTexture = Content.Load<Texture2D>("dino_run");
+            spriteSheet = Content.Load<Texture2D>("tiles");
 
             //position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
             //origin = new Vector2(texture.Width/2, texture.Height/2);
@@ -62,6 +69,7 @@ namespace HelloMono
         {
  
             Dino.Update();
+            Dirt.Update();
 
             base.Update(gameTime);
         }
@@ -82,6 +90,7 @@ namespace HelloMono
                 null);
 
             Dino.Draw(_spriteBatch);
+            Dirt.Draw(_spriteBatch);
 
             _spriteBatch.End();
             

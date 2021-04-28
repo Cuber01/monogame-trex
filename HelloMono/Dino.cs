@@ -39,7 +39,7 @@ namespace HelloMono
 
 
             Mytexture = texture;
-            position = new Vector2(20, 20);
+            position = new Vector2(100, 100);
             origin = new Vector2(Mytexture.Width/2, Mytexture.Height/2);
             
         }
