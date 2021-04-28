@@ -13,16 +13,7 @@ namespace HelloMono
 
         Texture2D texture;
 
-        
-        readonly float alpha = 1.0f;
-        readonly float rotation = 0.0f;
-        readonly float scale = 3f;
-        readonly SpriteEffects spriteEffect = SpriteEffects.None;
-        readonly float zDepth = 0.1f;
-
         private readonly Color bg_color_day = new Color(66, 76, 110, 255);
-        
-        //private Array dino_frames = [0,1];
 
         private CDino Dino;
 
@@ -57,7 +48,7 @@ namespace HelloMono
             
             
             texture = Content.Load<Texture2D>("dino_run");
-           // drawRec = new Rectangle(0, 0, 16 + 1, 19 + 1);
+
             //position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
             //origin = new Vector2(texture.Width/2, texture.Height/2);
 
@@ -97,6 +88,8 @@ namespace HelloMono
             base.Draw(gameTime);
         }
     }
+
+
 }
 
 

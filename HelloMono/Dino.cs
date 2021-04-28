@@ -11,11 +11,10 @@ namespace HelloMono
 {
     public class CDino
     {
-        
 
-        Vector2 position;
-        Rectangle drawRec;
-        Vector2 origin = new Vector2(0, 0);
+
+  
+
 
 
         readonly float alpha = 1.0f;
@@ -24,20 +23,40 @@ namespace HelloMono
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
         readonly float zDepth = 0.1f;
         private Texture2D Mytexture;
+        
+        
+        Vector2 position;
+        Rectangle drawRec;
+        Vector2 origin;
 
+        
+        int anim_i = 0;
+        int anim_t = 0;
+        
+        int[,] animation_frames = 
+        {
+             {0, 0, 17, 20},
+             {17, 0, 17, 20},
+             {34, 0, 17, 20},
+             {51, 0, 17, 20}
+        };
+        
+
+
+        
         public CDino(Texture2D texture)
         {
-            drawRec = new Rectangle(0, 0, 16 + 1, 19 + 1);
+
 
             Mytexture = texture;
-            drawRec = new Rectangle(0, 0, 16 + 1, 19 + 1);
             position = new Vector2(20, 20);
-            origin = new Vector2(20, 20);
+            origin = new Vector2(Mytexture.Width/2, Mytexture.Height/2);
+            
         }
 
 
 
-        public void Update()    //ET: keyboard oustside
+        public void Update()    // TODO Make a keyboard class
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
@@ -58,6 +77,9 @@ namespace HelloMono
             {
                 position.X += 2;
             }
+            
+            Animate();
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -72,6 +94,30 @@ namespace HelloMono
                 spriteEffect,
                 zDepth);
 
+        }
+
+        public void Animate()
+        {
+            
+            anim_t += 1;
+            
+            if (anim_t > 3)
+            {
+                if (anim_i <= 3)
+                {
+
+
+                    // How do I use the whole array from a dimensional one in C#?
+                    drawRec = new Rectangle(animation_frames[anim_i, 0], animation_frames[anim_i, 1], animation_frames[anim_i, 2] , animation_frames[anim_i, 3]);
+                    anim_i += 1;
+                }
+                else
+                {
+                    anim_i = 0;
+                }
+
+                anim_t = 0;
+            }
         }
     }
 }
