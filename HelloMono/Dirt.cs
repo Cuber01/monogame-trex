@@ -11,7 +11,6 @@ namespace HelloMono
         private static Random random = new Random();
         
         // sprite drawing options
-        readonly float alpha = 1.0f;
         readonly float rotation = 0.0f;
         readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
@@ -25,13 +24,13 @@ namespace HelloMono
         private int dirtSpriteNumber = random.Next(0,3);
 
         // decor rects
-        private Rectangle treeRect = new Rectangle(32,0,8,8);
-        private Rectangle caneRect = new Rectangle(24,0,8,8);
+        private Rectangle treeRect = new Rectangle(40,16,8,8);
+        private Rectangle caneRect = new Rectangle(32,16,8,8);
         
         // dirt rects
-        private static readonly Rectangle dirt1Rect = new Rectangle(0,0,8,8);
-        private static readonly Rectangle dirt2Rect = new Rectangle(8,0,8,8);
-        private static readonly Rectangle dirt3Rect = new Rectangle(16,0,0,0);
+        private static readonly Rectangle dirt1Rect = new Rectangle(0,0,16,8);
+        private static readonly Rectangle dirt2Rect = new Rectangle(16,0,16,8);
+        private static readonly Rectangle dirt3Rect = new Rectangle(32,0,16,8);
 
         private Rectangle[] dirt = {dirt1Rect, dirt2Rect, dirt3Rect};
         
@@ -52,6 +51,7 @@ namespace HelloMono
             position = _position;
 
             drawRec = dirt[dirtSpriteNumber];
+            Console.WriteLine(dirt[dirtSpriteNumber]);
 
             // TODO count if has flower is true
             // TODO count if has cane is true
@@ -62,7 +62,7 @@ namespace HelloMono
         
         public void Update()
         {
-            position.X -= 1;
+            //position.X -= 1;
         }
 
         
@@ -72,7 +72,7 @@ namespace HelloMono
             spriteBatch.Draw(spriteSheet, 
                 position,
                 drawRec,
-                Color.White, // this *may* cause problems
+                Color.White, 
                 rotation,
                 origin,
                 scale,

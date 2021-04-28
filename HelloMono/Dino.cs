@@ -6,8 +6,7 @@ namespace HelloMono
 {
     public class CDino
     {
-
-        readonly float alpha = 1.0f;
+        
         readonly float rotation = 0.0f;
         readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
@@ -77,7 +76,7 @@ namespace HelloMono
             spriteBatch.Draw(   Mytexture, 
                 position,
                 drawRec,
-                Color.White * alpha,
+                Color.White,
                 rotation,
                 origin,
                 scale,

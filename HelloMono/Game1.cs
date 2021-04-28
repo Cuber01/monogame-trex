@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,21 +21,23 @@ namespace HelloMono
 
         // load classes
         private CDino Dino;
-        private CDirt Dirt;
 
+//        private CDirt[] Dirts;
+        
+        List<CDirt> Dirts = new List<CDirt>();
+        
         
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
         }
 
         protected override void Initialize()
         {
           base.Initialize();
           
-          Window.Title = "My First Game";
+          Window.Title = "Monogame TRex Runner";
           this.IsMouseVisible = true;
           Window.AllowUserResizing = true;
 
@@ -43,7 +46,12 @@ namespace HelloMono
           _graphics.ApplyChanges();
 
           Dino = new CDino(dinoTexture);
-          Dirt = new CDirt(spriteSheet, new Vector2(100,100));
+          
+          for( int i = 0; i < 10; i++ )
+          {
+              Dirts.Add(new CDirt(spriteSheet, new Vector2(100+((16*3)*i),100)));
+          }
+
 
         }
         
@@ -55,11 +63,7 @@ namespace HelloMono
             
             dinoTexture = Content.Load<Texture2D>("dino_run");
             spriteSheet = Content.Load<Texture2D>("tiles");
-
-            //position = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
-            //origin = new Vector2(texture.Width/2, texture.Height/2);
-
-
+            
             
         }
         
@@ -69,7 +73,11 @@ namespace HelloMono
         {
  
             Dino.Update();
-            Dirt.Update();
+            foreach (CDirt Dirt in Dirts)
+            {
+                Dirt.Update();
+            }
+            
 
             base.Update(gameTime);
         }
@@ -90,7 +98,11 @@ namespace HelloMono
                 null);
 
             Dino.Draw(_spriteBatch);
-            Dirt.Draw(_spriteBatch);
+            
+            foreach (CDirt Dirt in Dirts)
+            {
+                Dirt.Draw(_spriteBatch);
+            }
 
             _spriteBatch.End();
             
