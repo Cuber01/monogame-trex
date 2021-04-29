@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,7 +11,7 @@ namespace HelloMono
         readonly float rotation = 0.0f;
         readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
-        readonly float zDepth = 0.1f;
+        readonly float zDepth = 0.2f;
         private Texture2D Mytexture;
         
         
@@ -21,6 +22,11 @@ namespace HelloMono
         
         int anim_i;
         int anim_t;
+
+        private bool isJumping = false;
+        private bool isFalling = false;
+        private float defPosY;
+        private float velocity;
         
         int[,] animation_frames = 
         {
@@ -33,12 +39,12 @@ namespace HelloMono
 
 
         
-        public CDino(Texture2D texture)
+        public CDino(Texture2D texture, Vector2 _position)
         {
-
-
+            
             Mytexture = texture;
-            position = new Vector2(100, 100);
+            position = _position;
+            defPosY = _position.Y;
             origin = new Vector2(Mytexture.Width/2, Mytexture.Height/2);
             
         }
@@ -47,26 +53,16 @@ namespace HelloMono
 
         public void Update()    // TODO Make a keyboard class
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                position.Y -= 2;
+                if (position.Y == defPosY)
+                {
+                    position.Y += 1f;
+                    velocity += 5;
+                }
             }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                position.Y += 2;
-            }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                position.X -= 2;
-            }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                position.X += 2;
-            }
-            
+
+            Jump();
             Animate();
 
         }
@@ -107,6 +103,18 @@ namespace HelloMono
 
                 anim_t = 0;
             }
+        }
+
+        private void Jump()
+        {
+            velocity -= 0.1f;
+
+            if (position.Y == defPosY)
+            {
+                velocity = 0;
+            }
+
+            position.Y -= velocity;
         }
     }
 }

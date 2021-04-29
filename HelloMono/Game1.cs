@@ -11,7 +11,7 @@ namespace HelloMono
         // load libraries
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        
+
         // load textures
         Texture2D dinoTexture;
         Texture2D spriteSheet;
@@ -45,11 +45,11 @@ namespace HelloMono
           _graphics.PreferredBackBufferHeight = 500;   
           _graphics.ApplyChanges();
 
-          Dino = new CDino(dinoTexture);
+          Dino = new CDino(dinoTexture, new Vector2(110,226));
           
-          for( int i = 0; i < 10; i++ )
+          for( int i = 0; i < 13; i++ )
           {
-              Dirts.Add(new CDirt(spriteSheet, new Vector2(100+((16*3)*i),100)));
+              Dirts.Add(new CDirt(spriteSheet, new Vector2(72+((16*3)*i),250)));
           }
 
 
@@ -64,40 +64,45 @@ namespace HelloMono
             dinoTexture = Content.Load<Texture2D>("dino_run");
             spriteSheet = Content.Load<Texture2D>("tiles");
             
-            
         }
         
         protected override void UnloadContent() {}
-
+        
+        private int generationCounter = 0;
         protected override void Update(GameTime gameTime)
         {
- 
+            
             Dino.Update();
             foreach (CDirt Dirt in Dirts)
             {
                 Dirt.Update();
             }
-            
+
+            generationCounter += 1;
+
+            if (generationCounter >= (16 * 3))
+            {
+                Dirts.Add(new CDirt(spriteSheet, new Vector2(600, 250)));
+                Dirts.Add(new CDirt(spriteSheet, new Vector2(600+16*3, 250)));
+                generationCounter = 0;
+            }
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-
-            GraphicsDevice.Clear(bg_color);
             
-            
-            
-            // This can be bad later, because I don't know what it does. SamplerState.PointClamp makes resized pixel art sharp and the rest is hopefully default.
-            _spriteBatch.Begin(SpriteSortMode.Deferred,
+            _spriteBatch.Begin(SpriteSortMode.BackToFront, // sort mode
                 BlendState.AlphaBlend,
-                SamplerState.PointClamp,
+                SamplerState.PointClamp, // resizing algorithm?
                 DepthStencilState.None,
                 RasterizerState.CullNone,
                 null);
 
             Dino.Draw(_spriteBatch);
+            
+            GraphicsDevice.Clear(bg_color);
             
             foreach (CDirt Dirt in Dirts)
             {

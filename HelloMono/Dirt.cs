@@ -9,17 +9,17 @@ namespace HelloMono
     {
         // random init
         private static Random random = new Random();
-        
+
         // sprite drawing options
         readonly float rotation = 0.0f;
         readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
-        private int zDepth;
+        private float zDepth = 1;
 
         
         // "properties"
-        private int hasTree;
-        private int hasCane;
+        private int hasTree = random.Next(0,5);
+        private int hasCane = random.Next(0,4);
         private int hasSpike;
         private int dirtSpriteNumber = random.Next(0,3);
 
@@ -51,10 +51,6 @@ namespace HelloMono
             position = _position;
 
             drawRec = dirt[dirtSpriteNumber];
-            Console.WriteLine(dirt[dirtSpriteNumber]);
-
-            // TODO count if has flower is true
-            // TODO count if has cane is true
 
         }
         
@@ -62,10 +58,10 @@ namespace HelloMono
         
         public void Update()
         {
-            //position.X -= 1;
+            position.X -= 2;
         }
 
-        
+        int placement = random.Next(0, 2);
         
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -79,7 +75,35 @@ namespace HelloMono
                 spriteEffect,
                 zDepth);
             
-            // TODO draw cane and flower
+            
+            if (hasCane == 1)
+            {
+                Vector2 canePos = new Vector2(position.X - (8*scale)*placement, position.Y - 8*scale); 
+                
+                spriteBatch.Draw(spriteSheet, 
+                    canePos,
+                    caneRect,
+                    Color.White, 
+                    rotation,
+                    origin,
+                    scale,
+                    spriteEffect,
+                    0.1f);
+            }
+            else if (hasTree == 1)
+            {
+                Vector2 treePos = new Vector2(position.X - (8*scale)*placement, position.Y - 8*scale); 
+                
+                spriteBatch.Draw(spriteSheet, 
+                    treePos,
+                    treeRect,
+                    Color.White, 
+                    rotation,
+                    origin,
+                    scale,
+                    spriteEffect,
+                    0.3f);
+            }
             
 
         }
