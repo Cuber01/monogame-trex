@@ -46,9 +46,9 @@ namespace HelloMono
 
 
 
-        public void Update()    // TODO Make a keyboard class
+        public void Update()   
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (CKeyboard.GetInput())
             {
                 if (position.Y == defPosY)
                 {
