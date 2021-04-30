@@ -9,7 +9,6 @@ namespace HelloMono
     {
         
         readonly float rotation = 0.0f;
-        readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
         readonly float zDepth = 0.2f;
         private Texture2D Mytexture;
@@ -75,7 +74,7 @@ namespace HelloMono
                 Color.White,
                 rotation,
                 origin,
-                scale,
+                Game1.scale,
                 spriteEffect,
                 zDepth);
             

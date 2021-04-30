@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,6 +23,9 @@ namespace HelloMono
         // load classes
         private CDino Dino;
         List<CDirt> Dirts = new List<CDirt>();
+        
+        //scale
+        public static readonly float scale = 3;
         
         
         public Game1()

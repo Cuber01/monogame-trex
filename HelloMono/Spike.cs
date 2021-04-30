@@ -9,7 +9,6 @@ namespace HelloMono
         
         // sprite drawing options
         readonly float rotation = 0.0f;
-        readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
         private float zDepth = 1;
 
@@ -39,7 +38,7 @@ namespace HelloMono
             position = _position;
             drawRec = spikes[SpriteNumber];
 
-            position.Y -= spikes[SpriteNumber].Height*scale;
+            position.Y -= spikes[SpriteNumber].Height*Game1.scale;
 
         }
 
@@ -65,7 +64,7 @@ namespace HelloMono
                 Color.White,
                 rotation,
                 origin,
-                scale,
+                Game1.scale,
                 spriteEffect,
                 zDepth);
             

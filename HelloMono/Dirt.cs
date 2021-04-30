@@ -13,7 +13,6 @@ namespace HelloMono
 
         // sprite drawing options
         readonly float rotation = 0.0f;
-        readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
         private float zDepth = 1;
         
@@ -88,7 +87,7 @@ namespace HelloMono
                 Color.White, 
                 rotation,
                 origin,
-                scale,
+                Game1.scale,
                 spriteEffect,
                 zDepth);
             
@@ -100,7 +99,7 @@ namespace HelloMono
             
             if (hasCane == 1)
             {
-                Vector2 canePos = new Vector2(position.X - (8*scale)*placement, position.Y - 8*scale); 
+                Vector2 canePos = new Vector2(position.X - (8*Game1.scale)*placement, position.Y - 8*Game1.scale); 
                 
                 spriteBatch.Draw(spriteSheet, 
                     canePos,
@@ -108,13 +107,13 @@ namespace HelloMono
                     Color.White, 
                     rotation,
                     origin,
-                    scale,
+                    Game1.scale,
                     spriteEffect,
                     0.1f);
             }
             else if (hasTree == 1)
             {
-                Vector2 treePos = new Vector2(position.X - (8*scale)*placement, position.Y - 8*scale); 
+                Vector2 treePos = new Vector2(position.X - (8*Game1.scale)*placement, position.Y - 8*Game1.scale); 
                 
                 spriteBatch.Draw(spriteSheet, 
                     treePos,
@@ -122,7 +121,7 @@ namespace HelloMono
                     Color.White, 
                     rotation,
                     origin,
-                    scale,
+                    Game1.scale,
                     spriteEffect,
                     0.1f);
             }
