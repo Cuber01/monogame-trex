@@ -15,8 +15,8 @@ namespace HelloMono
         private Texture2D Mytexture;
         
         
-        Vector2 position;
-        Rectangle drawRec;
+        public static Vector2 position;
+        public static Rectangle drawRec;
         Vector2 origin;
 
         
