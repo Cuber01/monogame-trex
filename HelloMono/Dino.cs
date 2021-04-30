@@ -78,6 +78,8 @@ namespace HelloMono
                 scale,
                 spriteEffect,
                 zDepth);
+            
+            
 
         }
 

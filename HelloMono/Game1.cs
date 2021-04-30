@@ -21,9 +21,6 @@ namespace HelloMono
 
         // load classes
         private CDino Dino;
-
-//        private CDirt[] Dirts;
-        
         List<CDirt> Dirts = new List<CDirt>();
         
         
@@ -46,7 +43,7 @@ namespace HelloMono
           _graphics.ApplyChanges();
 
           Dino = new CDino(dinoTexture, new Vector2(110,226));
-          
+
           for( int i = 0; i < 13; i++ )
           {
               Dirts.Add(new CDirt(spriteSheet, new Vector2(72+((16*3)*i),250)));
@@ -58,8 +55,8 @@ namespace HelloMono
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
             
             dinoTexture = Content.Load<Texture2D>("dino_run");
             spriteSheet = Content.Load<Texture2D>("tiles");
@@ -73,6 +70,7 @@ namespace HelloMono
         {
             
             Dino.Update();
+
             foreach (CDirt Dirt in Dirts)
             {
                 Dirt.Update();
@@ -100,14 +98,15 @@ namespace HelloMono
                 RasterizerState.CullNone,
                 null);
 
-            Dino.Draw(_spriteBatch);
-            
             GraphicsDevice.Clear(bg_color);
+
+            Dino.Draw(_spriteBatch);
             
             foreach (CDirt Dirt in Dirts)
             {
                 Dirt.Draw(_spriteBatch);
             }
+            
 
             _spriteBatch.End();
             

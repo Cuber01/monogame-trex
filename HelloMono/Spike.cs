@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace HelloMono
 {
-    public class Spike
+    public class CSpike
     {
         
         // sprite drawing options
@@ -32,23 +32,28 @@ namespace HelloMono
         Vector2 position;
         Vector2 origin;
 
-        public Spike(Texture2D _texture, Vector2 _position)
+        public CSpike(Texture2D _texture, Vector2 _position)
         {
             
             spriteSheet = _texture;
             position = _position;
             drawRec = spikes[SpriteNumber];
 
+            position.Y -= spikes[SpriteNumber].Height*scale;
+
         }
 
-        public void Update()
+        public void Update(Vector2 _position)
         {
+
+            position.X = _position.X;
             
             if (position.X >= CDino.position.X && position.X <= CDino.position.X + CDino.drawRec.Width && 
                 position.Y >= CDino.position.Y && position.Y <= CDino.position.Y + CDino.drawRec.Height)
             {
                 Console.Write("Collsion!!!!");
             }
+            
             
         }
 
@@ -63,6 +68,7 @@ namespace HelloMono
                 scale,
                 spriteEffect,
                 zDepth);
+            
         }
 
     }

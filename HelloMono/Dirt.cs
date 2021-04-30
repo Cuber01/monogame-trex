@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
@@ -15,12 +16,15 @@ namespace HelloMono
         readonly float scale = 3f;
         readonly SpriteEffects spriteEffect = SpriteEffects.None;
         private float zDepth = 1;
+        
 
+        // spike class
+        List<CSpike> Spikes = new List<CSpike>();
         
         // "properties"
         private int hasTree = random.Next(0,5);
         private int hasCane = random.Next(0,4);
-        private int hasSpike;
+        private int hasSpike = random.Next(0, 3);
         private int dirtSpriteNumber = random.Next(0,3);
 
         // decor rects
@@ -52,6 +56,13 @@ namespace HelloMono
 
             drawRec = dirt[dirtSpriteNumber];
 
+            if (hasSpike == 1)
+            {
+                Spikes.Add(new CSpike(spriteSheet, new Vector2(position.X,position.Y)));
+                hasCane = 0;
+                hasTree = 0;
+            }
+
         }
         
         
@@ -59,6 +70,12 @@ namespace HelloMono
         public void Update()
         {
             position.X -= 2;
+            
+            foreach (CSpike spike in Spikes)
+            {
+                spike.Update(position);
+            }
+
         }
 
         int placement = random.Next(0, 2);
@@ -75,6 +92,11 @@ namespace HelloMono
                 spriteEffect,
                 zDepth);
             
+            
+            foreach (CSpike spike in Spikes)
+            {
+                spike.Draw(spriteBatch);
+            }
             
             if (hasCane == 1)
             {
@@ -102,8 +124,9 @@ namespace HelloMono
                     origin,
                     scale,
                     spriteEffect,
-                    0.3f);
+                    0.1f);
             }
+            
             
 
         }
