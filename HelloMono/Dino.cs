@@ -13,19 +13,17 @@ namespace HelloMono
         readonly float zDepth = 0.2f;
         private Texture2D Mytexture;
         
-        
         public static Vector2 position;
         public static Rectangle drawRec;
         Vector2 origin;
-
         
         int anim_i;
         int anim_t;
-
-        private bool isJumping = false;
-        private bool isFalling = false;
+        
         private float defPosY;
         private float velocity;
+        
+        private CKeyboard Input;
         
         int[,] animation_frames = 
         {
@@ -35,8 +33,6 @@ namespace HelloMono
              {50, 1, 15, 19}
         };
         
-
-
         
         public CDino(Texture2D texture, Vector2 _position)
         {
@@ -56,18 +52,19 @@ namespace HelloMono
             {
                 if (position.Y == defPosY)
                 {
-                    position.Y += 1f;
+                    position.Y -= 1f;
                     velocity += 5;
                 }
             }
 
-            Jump();
+            Gravity();
             Animate();
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            
             spriteBatch.Draw(   Mytexture, 
                 position,
                 drawRec,
@@ -77,8 +74,6 @@ namespace HelloMono
                 Game1.scale,
                 spriteEffect,
                 zDepth);
-            
-            
 
         }
 
@@ -91,8 +86,7 @@ namespace HelloMono
             {
                 if (anim_i <= 3)
                 {
-
-
+                    
                     // TODO How do I use the whole array from a dimensional one in C#?
                     drawRec = new Rectangle(animation_frames[anim_i, 0], animation_frames[anim_i, 1], animation_frames[anim_i, 2] , animation_frames[anim_i, 3]);
                     anim_i += 1;
@@ -106,14 +100,17 @@ namespace HelloMono
             }
         }
 
-        private void Jump()
+        private void Gravity()
         {
             velocity -= 0.1f;
-
-            if (position.Y == defPosY)
+            //Console.WriteLine(position.Y);
+           // Console.WriteLine( defPosY);
+            if (position.Y > defPosY && position.Y < defPosY+5)
             {
                 velocity = 0;
+                position.Y = defPosY;
             }
+
 
             position.Y -= velocity;
         }

@@ -5,27 +5,14 @@ namespace HelloMono
     public class CKeyboard
     {
 
-        public void GetInput()
+        public CKeyboard()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-             //    position.Y -= 2;
-            }
-                        
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-              //  position.Y += 2;
-            }
-                        
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-             //  position.X -= 2;
-            }
-                        
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-               //position.X += 2;
-            }
+            
+        }
+
+        public bool GetInput()
+        {
+            return Keyboard.GetState().IsKeyDown(Keys.Space);
         }
         
         
