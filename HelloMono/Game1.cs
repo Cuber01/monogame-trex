@@ -27,6 +27,9 @@ namespace HelloMono
         //scale
         public static readonly float scale = 3;
         
+        //score
+        private SpriteFont font;
+        public static int score;
         
         public Game1()
         {
@@ -55,7 +58,6 @@ namespace HelloMono
 
 
         }
-        
 
         protected override void LoadContent()
         {
@@ -65,6 +67,8 @@ namespace HelloMono
             dinoTexture = Content.Load<Texture2D>("dino_run");
             spriteSheet = Content.Load<Texture2D>("tiles");
             
+            font = Content.Load<SpriteFont>("Score");
+            
         }
         
         protected override void UnloadContent() {}
@@ -72,6 +76,8 @@ namespace HelloMono
         private int generationCounter = 0;
         protected override void Update(GameTime gameTime)
         {
+
+            score += 1;
             
             Dino.Update();
 
@@ -111,12 +117,18 @@ namespace HelloMono
                 Dirt.Draw(_spriteBatch);
             }
             
+            _spriteBatch.DrawString(font, "Score: " + score, new Vector2(400, 100), Color.White);
 
             _spriteBatch.End();
             
             base.Draw(gameTime);
         }
+        
+
+        
     }
+    
+    
 
 
 }

@@ -23,7 +23,7 @@ namespace HelloMono
         // "properties"
         private int hasTree = random.Next(0,5);
         private int hasCane = random.Next(0,4);
-        private int hasSpike = random.Next(0, 3);
+        private int hasSpike = random.Next(0, 4);
         private int dirtSpriteNumber = random.Next(0,3);
 
         // decor rects
@@ -47,7 +47,7 @@ namespace HelloMono
         
  
 
-        public CDirt(Texture2D texture, Vector2 _position, bool _PotentialllyDangerous)
+        public CDirt(Texture2D texture, Vector2 _position, bool _potentiallyDangerous)
         {
 
             spriteSheet = texture;
@@ -55,7 +55,7 @@ namespace HelloMono
 
             drawRec = dirt[dirtSpriteNumber];
 
-            if (hasSpike == 1 && _PotentialllyDangerous)
+            if (hasSpike == 1 && _potentiallyDangerous)
             {
                 Spikes.Add(new CSpike(spriteSheet, new Vector2(position.X,position.Y)));
                 hasCane = 0;

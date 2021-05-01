@@ -26,6 +26,9 @@ namespace HelloMono
         // texture
         private readonly Texture2D spriteSheet;
         private Rectangle drawRec;
+        
+        // reference to game
+        public Game1 game;
        
         // vector info 
         Vector2 position;
@@ -50,7 +53,7 @@ namespace HelloMono
             if (position.X >= CDino.position.X && position.X <= CDino.position.X + CDino.drawRec.Width*Game1.scale && 
                 position.Y >= CDino.position.Y && position.Y <= CDino.position.Y + CDino.drawRec.Height*Game1.scale)
             {
-                // TODO a
+                Game1.score = 0;
             }
             
             
