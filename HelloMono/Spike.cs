@@ -47,10 +47,10 @@ namespace HelloMono
 
             position.X = _position.X;
             
-            if (position.X >= CDino.position.X && position.X <= CDino.position.X + CDino.drawRec.Width && 
-                position.Y >= CDino.position.Y && position.Y <= CDino.position.Y + CDino.drawRec.Height)
+            if (position.X >= CDino.position.X && position.X <= CDino.position.X + CDino.drawRec.Width*Game1.scale && 
+                position.Y >= CDino.position.Y && position.Y <= CDino.position.Y + CDino.drawRec.Height*Game1.scale)
             {
-                Console.Write("Collsion!!!!");
+                // TODO a
             }
             
             

@@ -46,11 +46,11 @@ namespace HelloMono
           _graphics.PreferredBackBufferHeight = 500;   
           _graphics.ApplyChanges();
 
-          Dino = new CDino(dinoTexture, new Vector2(110,226));
+          Dino = new CDino(dinoTexture, new Vector2(110,200));
 
           for( int i = 0; i < 13; i++ )
           {
-              Dirts.Add(new CDirt(spriteSheet, new Vector2(72+((16*3)*i),250)));
+              Dirts.Add(new CDirt(spriteSheet, new Vector2(72+((16*3)*i),250), false));
           }
 
 
@@ -84,8 +84,8 @@ namespace HelloMono
 
             if (generationCounter >= (16 * 3))
             {
-                Dirts.Add(new CDirt(spriteSheet, new Vector2(600, 250)));
-                Dirts.Add(new CDirt(spriteSheet, new Vector2(600+16*3, 250)));
+                Dirts.Add(new CDirt(spriteSheet, new Vector2(600, 250), true));
+                Dirts.Add(new CDirt(spriteSheet, new Vector2(600+16*scale, 250), true));
                 generationCounter = 0;
             }
 
@@ -105,7 +105,7 @@ namespace HelloMono
             GraphicsDevice.Clear(bg_color);
 
             Dino.Draw(_spriteBatch);
-            
+
             foreach (CDirt Dirt in Dirts)
             {
                 Dirt.Draw(_spriteBatch);

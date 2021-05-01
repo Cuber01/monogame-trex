@@ -47,7 +47,7 @@ namespace HelloMono
         
  
 
-        public CDirt(Texture2D texture, Vector2 _position)
+        public CDirt(Texture2D texture, Vector2 _position, bool _PotentialllyDangerous)
         {
 
             spriteSheet = texture;
@@ -55,7 +55,7 @@ namespace HelloMono
 
             drawRec = dirt[dirtSpriteNumber];
 
-            if (hasSpike == 1)
+            if (hasSpike == 1 && _PotentialllyDangerous)
             {
                 Spikes.Add(new CSpike(spriteSheet, new Vector2(position.X,position.Y)));
                 hasCane = 0;

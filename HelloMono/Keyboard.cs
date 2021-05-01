@@ -10,9 +10,14 @@ namespace HelloMono
             
         }
 
-        public static bool GetInput()
+        public static bool SpacePressed()
         {
             return Keyboard.GetState().IsKeyDown(Keys.Space);
+        }
+        
+        public static bool DownArrowPressed()
+        {
+            return Keyboard.GetState().IsKeyDown(Keys.Down);
         }
         
         

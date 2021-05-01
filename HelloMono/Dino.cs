@@ -16,6 +16,8 @@ namespace HelloMono
         public static Vector2 position;
         public static Rectangle drawRec;
         Vector2 origin;
+
+        private bool OnGround = true;
         
         int anim_i;
         int anim_t;
@@ -40,7 +42,7 @@ namespace HelloMono
             Mytexture = texture;
             position = _position;
             defPosY = _position.Y;
-            origin = new Vector2(Mytexture.Width/2, Mytexture.Height/2);
+            //origin = new Vector2(Mytexture.Width/2, Mytexture.Height/2);
             
         }
 
@@ -48,16 +50,23 @@ namespace HelloMono
 
         public void Update()   
         {
-            if (CKeyboard.GetInput())
+            if (CKeyboard.SpacePressed())
             {
                 if (position.Y == defPosY)
                 {
                     position.Y -= 1f;
                     velocity += 5;
+                    OnGround = false;
                 }
             }
 
             Gravity();
+
+            if (velocity < 0 && CKeyboard.DownArrowPressed() && OnGround == false)
+            {
+                velocity -= 0.3f;
+            }
+            
             Animate();
 
         }
@@ -103,12 +112,12 @@ namespace HelloMono
         private void Gravity()
         {
             velocity -= 0.1f;
-            //Console.WriteLine(position.Y);
-           // Console.WriteLine( defPosY);
-            if (position.Y > defPosY && position.Y < defPosY+5)
+
+            if (position.Y >= defPosY)
             {
                 velocity = 0;
                 position.Y = defPosY;
+                OnGround = true;
             }
 
 
