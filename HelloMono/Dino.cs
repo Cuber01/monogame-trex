@@ -1,7 +1,6 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+
 
 namespace HelloMono
 {
@@ -27,6 +26,7 @@ namespace HelloMono
         
         private CKeyboard Input;
         
+        
         int[,] animation_frames = 
         {
              {1, 1, 15, 19},
@@ -42,7 +42,6 @@ namespace HelloMono
             Mytexture = texture;
             position = _position;
             defPosY = _position.Y;
-            //origin = new Vector2(Mytexture.Width/2, Mytexture.Height/2);
             
         }
 
@@ -57,6 +56,7 @@ namespace HelloMono
                     position.Y -= 1f;
                     velocity += 5;
                     OnGround = false;
+                    CSoundManager.PlaySound(0);
                 }
             }
 

@@ -33,6 +33,9 @@ namespace HelloMono
         // vector info 
         Vector2 position;
         Vector2 origin;
+        
+        //audio 
+        private bool audio_played;
 
         public CSpike(Texture2D _texture, Vector2 _position)
         {
@@ -49,11 +52,16 @@ namespace HelloMono
         {
 
             position.X = _position.X;
-            
+
             if (position.X >= CDino.position.X && position.X <= CDino.position.X + CDino.drawRec.Width*Game1.scale && 
                 position.Y >= CDino.position.Y && position.Y <= CDino.position.Y + CDino.drawRec.Height*Game1.scale)
             {
                 Game1.score = 0;
+                if (audio_played != true)
+                {
+                    CSoundManager.PlaySound(1);
+                    audio_played = true;
+                }
             }
             
             

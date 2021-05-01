@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -22,6 +23,7 @@ namespace HelloMono
 
         // load classes
         private CDino Dino;
+        private CSoundManager SoundManager;
         List<CDirt> Dirts = new List<CDirt>();
         
         //scale
@@ -31,9 +33,13 @@ namespace HelloMono
         private SpriteFont font;
         public static int score;
         
+        //sfx
+        List<SoundEffect> soundEffects;
+        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            soundEffects = new List<SoundEffect>();
             Content.RootDirectory = "Content";
         }
 
@@ -50,6 +56,7 @@ namespace HelloMono
           _graphics.ApplyChanges();
 
           Dino = new CDino(dinoTexture, new Vector2(110,200));
+          SoundManager = new CSoundManager(soundEffects);
 
           for( int i = 0; i < 13; i++ )
           {
@@ -68,6 +75,9 @@ namespace HelloMono
             spriteSheet = Content.Load<Texture2D>("tiles");
             
             font = Content.Load<SpriteFont>("Score");
+            
+            soundEffects.Add(Content.Load<SoundEffect>("jump"));
+            soundEffects.Add(Content.Load<SoundEffect>("damage"));
             
         }
         
@@ -116,6 +126,7 @@ namespace HelloMono
             {
                 Dirt.Draw(_spriteBatch);
             }
+            
             
             _spriteBatch.DrawString(font, "Score: " + score, new Vector2(400, 100), Color.White);
 
